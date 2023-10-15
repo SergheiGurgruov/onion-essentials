@@ -1,0 +1,23 @@
+{
+  "name": "@onion2d/onion-essentials",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./dist/index.js",
+  "type": "module",
+  "devDependencies": {
+    "@types/node": "^20.8.6",
+    "tsc": "^2.0.4",
+    "typescript": "^5.2.2",
+    "undici-types": "^5.25.3"
+  },
+  "scripts": {
+    "build": "tsc"
+  },
+  "author": "Serghei Gurgurov",
+  "license": "ISC",
+  "keywords": [
+    "essentials",
+    "tools",
+    "utils"
+  ]
+}
