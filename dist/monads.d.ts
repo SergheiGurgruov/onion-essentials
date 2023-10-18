@@ -1,3 +1,5 @@
+export declare function some<T>(value: T): Maybe<T>;
+export declare function none<T = any>(): Maybe<T>;
 export declare class Maybe<T> {
     value: T;
     private static _;

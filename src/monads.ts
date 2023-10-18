@@ -1,3 +1,12 @@
+
+export function some<T>(value: T): Maybe<T> {
+    return Maybe.some(value);
+}
+
+export function none<T = any>(): Maybe<T> {
+    return Maybe.none;
+}
+
 export class Maybe<T> {
     private static _ = {};
     private constructor(public value: T) { }

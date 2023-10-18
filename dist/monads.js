@@ -1,3 +1,9 @@
+export function some(value) {
+    return Maybe.some(value);
+}
+export function none() {
+    return Maybe.none;
+}
 export class Maybe {
     value;
     static _ = {};
