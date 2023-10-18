@@ -18,8 +18,5 @@
     "essentials",
     "tools",
     "utils"
-  ],
-  "dependencies": {
-    "@onion2d/onion-essentials": "github:SergheiGurgruov/onion-essentials"
-  }
+  ]
 }
