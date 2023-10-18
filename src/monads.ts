@@ -63,6 +63,14 @@ export class Result<T, E = Error> {
         return new Result<any, E>(undefined, error);
     }
 
+    public isOk(): boolean {
+        return !this.error;
+    }
+
+    public isErr(): boolean {
+        return !!this.error;
+    }
+
     public unwrap(): T {
         if (this.error) {
             throw this.error;

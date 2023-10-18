@@ -54,6 +54,12 @@ export class Result {
     static Err(error) {
         return new Result(undefined, error);
     }
+    isOk() {
+        return !this.error;
+    }
+    isErr() {
+        return !!this.error;
+    }
     unwrap() {
         if (this.error) {
             throw this.error;

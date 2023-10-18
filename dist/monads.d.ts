@@ -17,6 +17,8 @@ export declare class Result<T, E = Error> {
     private constructor();
     static Ok<T>(value: T): Result<T>;
     static Err<E>(error: E): Result<any, E>;
+    isOk(): boolean;
+    isErr(): boolean;
     unwrap(): T;
     match<U>(ok: (value: T) => U, err: (error: E) => U): U;
     static encase<U>(fn: () => U): Result<U>;
