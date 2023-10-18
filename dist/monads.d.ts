@@ -12,10 +12,11 @@ export declare class Maybe<T> {
     toString(): string;
 }
 export declare class Result<T, E = Error> {
-    private value?;
-    private error?;
+    #private;
     private constructor();
     static Ok<T>(value: T): Result<T>;
+    get error(): Maybe<E>;
+    get value(): Maybe<T>;
     static Err<E>(error: E): Result<any, E>;
     isOk(): boolean;
     isErr(): boolean;

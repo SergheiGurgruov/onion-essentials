@@ -1,6 +1,6 @@
 export class Maybe<T> {
     private static _ = {};
-    private constructor(public value: T) {}
+    private constructor(public value: T) { }
 
     public unwrap(): T {
         if (this.value === Maybe._) {
@@ -49,14 +49,22 @@ export class Maybe<T> {
 }
 
 export class Result<T, E = Error> {
-    private value?: T;
-    private error?: E;
+    #value?: T;
+    #error?: E;
     private constructor(value?: T, error?: E) {
-        this.value = value;
-        this.error = error
+        this.#value = value;
+        this.#error = error
     }
     public static Ok<T>(value: T): Result<T> {
         return new Result(value);
+    }
+
+    get error(): Maybe<E> {
+        return this.#error ? Maybe.some(this.#error) : Maybe.none;
+    }
+
+    get value(): Maybe<T> {
+        return this.#value ? Maybe.some(this.#value) : Maybe.none;
     }
 
     public static Err<E>(error: E): Result<any, E> {
@@ -64,24 +72,24 @@ export class Result<T, E = Error> {
     }
 
     public isOk(): boolean {
-        return !this.error;
+        return !this.#error;
     }
 
     public isErr(): boolean {
-        return !!this.error;
+        return !!this.#error;
     }
 
     public unwrap(): T {
-        if (this.error) {
-            throw this.error;
+        if (this.#error) {
+            throw this.#error;
         }
-        return this.value as T;
+        return this.#value as T;
     }
     public match<U>(ok: (value: T) => U, err: (error: E) => U): U {
-        if (this.error) {
-            return err(this.error);
+        if (this.#error) {
+            return err(this.#error);
         }
-        return ok(this.value as T);
+        return ok(this.#value as T);
     }
 
     public static encase<U>(fn: () => U): Result<U> {
@@ -93,17 +101,17 @@ export class Result<T, E = Error> {
     }
 
     public chain<U, V = Error>(fn: (value: T) => U): Result<U, V> {
-        if (this.error) {
+        if (this.#error) {
             return this as any as Result<U, V>;
         }
-        return this.recycle<U, V>(() => fn(this.value as T));
+        return this.recycle<U, V>(() => fn(this.#value as T));
     }
 
     private recycle<U, V>(fn: () => U): Result<U, V> {
         try {
-            this.value = fn() as any as T;
+            this.#value = fn() as any as T;
         } catch (e) {
-            this.error = e as any as E;
+            this.#error = e as any as E;
         }
         return this as any as Result<U, V>;
     }

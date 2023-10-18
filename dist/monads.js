@@ -42,35 +42,41 @@ export class Maybe {
     }
 }
 export class Result {
-    value;
-    error;
+    #value;
+    #error;
     constructor(value, error) {
-        this.value = value;
-        this.error = error;
+        this.#value = value;
+        this.#error = error;
     }
     static Ok(value) {
         return new Result(value);
+    }
+    get error() {
+        return this.#error ? Maybe.some(this.#error) : Maybe.none;
+    }
+    get value() {
+        return this.#value ? Maybe.some(this.#value) : Maybe.none;
     }
     static Err(error) {
         return new Result(undefined, error);
     }
     isOk() {
-        return !this.error;
+        return !this.#error;
     }
     isErr() {
-        return !!this.error;
+        return !!this.#error;
     }
     unwrap() {
-        if (this.error) {
-            throw this.error;
+        if (this.#error) {
+            throw this.#error;
         }
-        return this.value;
+        return this.#value;
     }
     match(ok, err) {
-        if (this.error) {
-            return err(this.error);
+        if (this.#error) {
+            return err(this.#error);
         }
-        return ok(this.value);
+        return ok(this.#value);
     }
     static encase(fn) {
         try {
@@ -81,17 +87,17 @@ export class Result {
         }
     }
     chain(fn) {
-        if (this.error) {
+        if (this.#error) {
             return this;
         }
-        return this.recycle(() => fn(this.value));
+        return this.recycle(() => fn(this.#value));
     }
     recycle(fn) {
         try {
-            this.value = fn();
+            this.#value = fn();
         }
         catch (e) {
-            this.error = e;
+            this.#error = e;
         }
         return this;
     }
