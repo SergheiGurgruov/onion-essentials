@@ -6,7 +6,6 @@
   "type": "module",
   "devDependencies": {
     "@types/node": "^20.8.6",
-    "tsc": "^2.0.4",
     "typescript": "^5.2.2",
     "undici-types": "^5.25.3"
   },
