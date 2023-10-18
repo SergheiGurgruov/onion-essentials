@@ -1,5 +1,5 @@
 {
-  "name": "@onion2d/onion-essentials",
+  "name": "onion-essentials",
   "version": "1.0.2",
   "description": "",
   "main": "./dist/index.js",
