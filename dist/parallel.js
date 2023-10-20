@@ -1,15 +1,18 @@
 export function parallel(parallel, complete) {
-    let functionsToRun = 0;
+    let functionsToRun = 1;
     const results = [];
-    const $ = (data) => {
-        results.push(data);
+    const $ = (data, ignoreOutput = false) => {
+        if (!ignoreOutput) {
+            results.push(data);
+        }
         functionsToRun--;
         if (functionsToRun === 0) {
             complete(results);
         }
     };
-    const await = (_) => {
+    const $await = (_) => {
         functionsToRun++;
     };
-    parallel(await, $);
+    parallel($await, $);
+    $(undefined, true);
 }
