@@ -16,3 +16,13 @@ export function parallel(parallel, complete) {
     parallel($await, $);
     $(undefined, true);
 }
+export function once(callback) {
+    const resolver = (function* () {
+        yield true;
+    })();
+    return (...args) => {
+        if (resolver.next().value) {
+            callback(...args);
+        }
+    };
+}

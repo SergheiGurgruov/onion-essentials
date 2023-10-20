@@ -19,3 +19,14 @@ export function parallel(parallel: ($await: (_: void) => void, $: (data: any) =>
 
     $(undefined, true);
 }
+
+export function once<T extends unknown[]>(callback: (...args: T) => void) {
+    const resolver = (function* () {
+        yield true;
+    })();
+    return (...args: T) => {
+        if (resolver.next().value) {
+            callback(...args);
+        }
+    }
+}
