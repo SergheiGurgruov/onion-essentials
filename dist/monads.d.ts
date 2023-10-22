@@ -16,7 +16,7 @@ export declare class Maybe<T> {
 export declare class Result<T, E = Error> {
     #private;
     private constructor();
-    static Ok<T>(value: T): Result<T>;
+    static Ok<T>(value?: T): Result<T>;
     get error(): Maybe<E>;
     get value(): Maybe<T>;
     static Err<E>(error: E): Result<any, E>;

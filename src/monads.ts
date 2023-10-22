@@ -64,7 +64,7 @@ export class Result<T, E = Error> {
         this.#value = value;
         this.#error = error
     }
-    public static Ok<T>(value: T): Result<T> {
+    public static Ok<T>(value?: T): Result<T> {
         return new Result(value);
     }
 
