@@ -28,7 +28,7 @@ export class Maybe {
     static get none() {
         return new Maybe(Maybe._);
     }
-    match(some, none) {
+    match(none, some) {
         if (this.value === Maybe._) {
             return none();
         }
@@ -78,7 +78,7 @@ export class Result {
         }
         return this.#value;
     }
-    match(ok, err) {
+    match(err, ok) {
         if (this.#error) {
             return err(this.#error);
         }

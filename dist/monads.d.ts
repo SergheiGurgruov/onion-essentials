@@ -9,7 +9,7 @@ export declare class Maybe<T> {
     isSome(): boolean;
     static some<T>(value: T): Maybe<T>;
     static get none(): Maybe<any>;
-    match<U>(some: (value: T) => U, none: () => U): U;
+    match<U>(none: () => U, some: (value: T) => U): U;
     chain<U>(fn: (value: T) => U): Result<U>;
     toString(): string;
 }
@@ -23,7 +23,7 @@ export declare class Result<T, E = Error> {
     isOk(): boolean;
     isErr(): boolean;
     unwrap(): T;
-    match<U>(ok: (value: T) => U, err: (error: E) => U): U;
+    match<U>(err: (error: E) => U, ok: (value: T) => U): U;
     static encase<U>(fn: () => U): Result<U>;
     chain<U, V = Error>(fn: (value: T) => U): Result<U, V>;
     private recycle;

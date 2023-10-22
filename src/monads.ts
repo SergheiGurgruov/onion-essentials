@@ -34,7 +34,7 @@ export class Maybe<T> {
         return new Maybe(Maybe._);
     }
 
-    public match<U>(some: (value: T) => U, none: () => U): U {
+    public match<U>(none: () => U, some: (value: T) => U): U {
         if (this.value === Maybe._) {
             return none();
         }
@@ -94,7 +94,7 @@ export class Result<T, E = Error> {
         }
         return this.#value as T;
     }
-    public match<U>(ok: (value: T) => U, err: (error: E) => U): U {
+    public match<U>(err: (error: E) => U, ok: (value: T) => U): U {
         if (this.#error) {
             return err(this.#error);
         }
