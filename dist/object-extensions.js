@@ -1,5 +1,5 @@
-const _valueAt = (obj, path) => path.split(".").reduce((a, v) => (a ? a[v] : undefined), obj);
+import { valueAt } from "./object-path.js";
 Object.prototype.valueAt = function (path) {
-    return _valueAt(this, path);
+    return valueAt(this, path);
 };
 export default {};

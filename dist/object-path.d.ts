@@ -7,4 +7,13 @@ type DottablePaths<T, P extends Prev[number] = 10> = [] | ([P] extends [never] ?
 }[ExtractDottable<keyof T>] : never);
 type Join<T extends string[], D extends string> = T extends [] ? never : T extends [infer F] ? F : T extends [infer F, ...infer R] ? F extends string ? string extends F ? string : `${F}${D}${Join<Extract<R, string[]>, D>}` : never : string;
 export type ObjectPath<T> = Join<Extract<DottablePaths<T>, string[]>, ".">;
+/**  returns the value of an object at a specified path
+ * ```ts
+ * //example:
+ * const obj = { a: { b: { c: 1 } } };
+ * const value = valueAt(obj, "a.b.c"); // value is 1
+ * ```
+*/
+export declare function valueAt<T>(obj: T, path: ObjectPath<T>): unknown;
+export declare function valueAt<T>(obj: T, path: string): unknown;
 export {};
