@@ -5,5 +5,6 @@ export { ObjectPool } from './object-pool.js';
 export { ActionQueue } from './action-queue.js';
 export { idGenerator } from './id-generator.js';
 export { default as ArrayExtensions } from './array-extensions.js';
+export { default as ObjectExtensions } from './object-extensions.js';
 export { match, matchFirst } from './pattern-matching.js';
 export { parallel, once } from './parallel.js';
