@@ -22,3 +22,16 @@ type Join<T extends string[], D extends string> =
     F extends string ? string extends F ? string : `${F}${D}${Join<Extract<R, string[]>, D>}` : never : string;
 
 export type ObjectPath<T> = Join<Extract<DottablePaths<T>, string[]>, ".">;
+
+/**  returns the value of an object at a specified path
+ * ```ts
+ * //example:
+ * const obj = { a: { b: { c: 1 } } };
+ * const value = valueAt(obj, "a.b.c"); // value is 1
+ * ```
+*/
+export function valueAt<T>(obj: T, path: ObjectPath<T>): unknown;
+export function valueAt<T>(obj: T, path: string): unknown;
+export function valueAt<T>(obj: T, path: ObjectPath<T> | string): unknown { return _valueAt(obj, path as string) };
+
+const _valueAt = (obj: any, path: string) => path.split(".").reduce((a, v) => (a ? a[v] : undefined), obj);
