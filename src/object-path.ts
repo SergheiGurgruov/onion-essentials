@@ -21,7 +21,7 @@ type Join<T extends string[], D extends string> =
     T extends [infer F, ...infer R] ?
     F extends string ? string extends F ? string : `${F}${D}${Join<Extract<R, string[]>, D>}` : never : string;
 
-export type ObjectPath<T> = Join<Extract<DottablePaths<T>, string[]>, ".">;
+export type ObjectPath<T> = Join<Extract<DottablePaths<T>, string[]>, "."> extends string ? Join<Extract<DottablePaths<T>, string[]>, "."> : never;
 
 /**  returns the value of an object at a specified path
  * ```ts

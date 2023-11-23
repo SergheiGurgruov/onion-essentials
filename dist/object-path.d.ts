@@ -6,7 +6,7 @@ type DottablePaths<T, P extends Prev[number] = 10> = [] | ([P] extends [never] ?
     [K in ExtractDottable<keyof T>]: [K, ...DottablePaths<T[K], Prev[P]>];
 }[ExtractDottable<keyof T>] : never);
 type Join<T extends string[], D extends string> = T extends [] ? never : T extends [infer F] ? F : T extends [infer F, ...infer R] ? F extends string ? string extends F ? string : `${F}${D}${Join<Extract<R, string[]>, D>}` : never : string;
-export type ObjectPath<T> = Join<Extract<DottablePaths<T>, string[]>, ".">;
+export type ObjectPath<T> = Join<Extract<DottablePaths<T>, string[]>, "."> extends string ? Join<Extract<DottablePaths<T>, string[]>, "."> : never;
 /**  returns the value of an object at a specified path
  * ```ts
  * //example:
