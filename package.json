@@ -9,6 +9,13 @@
     "typescript": "^5.2.2",
     "undici-types": "^5.25.3"
   },
+  "bugs": {
+    "url": "https://github.com/SergheiGurgurov/onion-essentials/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SergheiGurgurov/onion-essentials.git"
+  },
   "scripts": {
     "build": "tsc"
   },
@@ -18,6 +25,7 @@
     "utils",
     "queue",
     "linked-list",
-    "monad"
+    "monad",
+    "object-path"
   ]
 }
